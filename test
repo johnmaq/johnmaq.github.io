@@ -1,0 +1,32 @@
+#define _syscall1(type,name,atype,a) \
+type name(atype a) \
+{ \
+long __res; \
+__asm__ volatile ("int $0x80" \
+	: "=a" (__res) \
+	: "0" (__NR_##name),"b" ((long)(a))); \
+if (__res >= 0) \
+	return (type) __res; \
+errno = -__res; \
+return -1; \
+}
+
+_syscall1(int,setup,void *,BIOS)
+
+#define _syscall1(int,setup,void *,BIOS) \
+int setup(void * BIOS)
+{
+	long __res;
+	__asm__ volatile 
+		("int $0x80"					//0x80系统调用软件中断
+								//输入参数：eax＝功能号（比如0为setup系统调用）
+		: "=a" (__res)
+		: "0" (0),"b" ((long)(BIOS))			//"0"表示输出操作数与输入操作数一样都为ax
+		);
+	if (__res >= 0)
+	return (int) __res;
+	errno = -__res;
+	return -1;
+}
+
+//asm( “code” : outputs : inputs : clobbers);

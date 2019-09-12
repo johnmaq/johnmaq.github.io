@@ -1,0 +1,70 @@
+1、远程主机复制文件到本地
+scp -P port remote_username@remote_ip:remote_file local_file
+2、vim打开文件中打开另一个文件(窗口显示要打开的文件，原来文件不显示)
+esc:open filename
+esc:open . 列出当前目录下的文件供打开
+3、wim打开文件中多窗口打开另一个文件(sp水平分割窗口，vsp垂直分割窗口)
+esc:sp filename 
+esc:sp . 列出当前目录下的文件供打开
+esc:vsp filename
+esc:vsp . 列出当前目录下的文件供打开
+ctrl+ww 多窗口依次切换
+4、合并两个文件差异之处
+vim filename1
+esc:vertical diffsplit filename2
+之后出现了两个文件的差异
+在一行不同处，输入do可将另一个buffer的改动应用于当前buffer
+输入dp 可将当前buffer的该行内容应用于另一个buffer。
+5、字符串替换
+esc:%s/str1/str2/g   	替换每一行中所有str1为str2 常用！
+esc:s/str1/str2/g 	替换当前行所有str1为str2
+6、列操作
+在选定行的vim行前面加上// ，一般在语言中表示注释
+光标定位到要操作的地方。
+CTRL+v 进入“可视 块”模式，选取这一列操作多少行。
+SHIFT+i 输入要插入的内容。//先按shitf+i，之后在光标所在处输入要插入的内容
+ESC 按两次，会在每行的选定的区域出现插入的内容。
+7、删除剪切固定行
+esc:i,.d	删除剪切从第i行到目前所在行内容
+8、当前目录查找字符串
+find . -type f -print | xargs grep "hostname"
+grep -rn VirtualHost . 递归查找字符串VirtualHost并找出当前目标具体所在行
+9、查看当前运行进程
+ps aux | less	//pid从小到大
+ps aux | grep "eclipse"	//搜索进程名有eclipse的正在运行的进程
+
+shell给一个文件中的每一行开头插入字符的方法：awk '{print "X"$0}' fileName
+
+shell给一个文件中的每一行结尾插入字符的方法：awk '{print $0"X"}' fileName
+
+shell给一个文件中的每一行的指定列插入字符的方法：awk '$O=$O" X"' fileName
+
+第一种方法：
+
+cat -A filename 就可以看到windows下的断元字符 ^M
+要去除他，最简单用下面的命令：
+dos2unix filename
+ 
+第二种方法：
+ 
+sed -i 's/^M//g' filename
+#注意：^M的输入方式是 Ctrl + v ，然后Ctrl + M 
+ 
+第三种方法：
+ 
+#vi filename
+ 
+:1,$ s/^M//g
+
+^M 输入方法： ctrl+V ,ctrl+M
+ 
+第四种方法：
+#cat filename |tr -d '/r' > newfile
+#^M 可用 /r 代替
+
+新增一个文件git diff
+a.git add filename
+b.git diff HEAD -- filename
+
+ssh root@172.16.90.61
+scp stm32_microcontroller.bin root@172.16.90.61:/media/card/

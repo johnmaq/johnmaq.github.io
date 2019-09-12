@@ -1,0 +1,9 @@
+gst-launch-1.0 -v udpsrc port=4321 caps='application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)RAW, sampling=(string)BGR, depth=(string)8, width=(string)1920, height=(string)1080, colorimetry=(string)SMPTE240M, payload=(int)96, ssrc=(uint)3567084042, timestamp-offset=(uint)2060567600, seqnum-offset=(uint)27634, a-framerate=(string)30' ! rtpvrawdepay ! videoconvert ! video/x-raw, width=1920, height=1080 ! ximagesink
+
+board run:(host=ip:is local computer IP)
+cam-refinedet 0 | gst-launch-1.0 -v fdsrc ! videoparse width=1920 height=1080 format=bgr framerate=30/1  ! rtpvrawpay ! udpsink host=172.16.1.101 port=4321
+
+ 
+local cpmputer run:
+gst-launch-1.0 -v udpsrc port=4321 caps='application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)RAW, sampling=(string)BGR, depth=(string)8, width=(string)1920, height=(string)1080, colorimetry=(string)SMPTE240M, payload=(int)96, ssrc=(uint)3567084042, timestamp-offset=(uint)2060567600, seqnum-offset=(uint)27634, a-framerate=(string)30' ! rtpvrawdepay ! videoconvert ! video/x-raw, width=1920, height=1080 ! fpsdisplaysink video-sink="ximagesink" text-overlay=true sync=false
+

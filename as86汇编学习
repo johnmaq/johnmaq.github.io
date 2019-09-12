@@ -1,0 +1,21 @@
+linux-kernel-0.12的boot文件夹中的bootsect.s和setup.s是基于as86汇编格式来编译执行的,和intel的80386略有区别,比如movz,intel的80386就没有,具体as86格式可以参考<<Using as: The GNU Assembler>>的8.12.3节(Machine Dependent Features->80386 Dependent Features)介绍指令命名,原文如下:
+Instruction mnemonics are suffixed with one character modifiers which specify the size
+of operands. The letters ‘b’, ‘w’, ‘l’ and ‘q’ specify byte, word, long and quadruple word
+operands. If no suffix is specified by an instruction then as tries to fill in the missing
+suffix based on the destination register operand (the last one by convention). Thus, ‘mov
+%ax, %bx’ is equivalent to ‘movw %ax, %bx’; also, ‘mov $1, %bx’ is equivalent to ‘movw $1,
+bx’.
+翻译中文如下:
+指令助记符以指定大小的字符修饰符作为后缀操作数。字母“b”、“w”、“l”和“q”分别指定字节、字(2字节)、长字(4字节)和4字(8字节)操作数。如果指令助记符没有指定后缀，那么将尝试填充缺失的部分基于目标寄存器操作数(按照约定是最后一个操作数)。因此,“mov %ax， %bx '等价于' movw %ax， %bx '(bx为16位长寄存器,所以按照字来补充);此外，“mov $1， %bx”等价于“movw $1，bx”。
+
+在<<A-32 Intel Architecture Software Developer's Manual>>的Volume 2, Chapter 4,4.3节中MOVS/MOVSB/MOVSW/MOVSD/MOVSQ—Move Data from String to String介绍mov指令分为“显式操作数”形式和“no-”形式操作数”的形式,在linux-kernel-0.12中
+rep
+movw(no-形式),不需要指定源目的寄存器,默认move word from address DS:(E)SI to ES:(E)DI.
+原文如下:
+At the assembly-code level, two forms of this instruction are allowed: the “explicit-operands” form and the “no-operands” form. The explicit-operands form (specified with the MOVS mnemonic) allows the source and destination operands to be specified explicitly. Here, the source and destination operands should be symbols that indicate the size and location of the source value and the destination, respectively. This explicit-operands form is provided to allow documentation; however, note that the documentation provided by this form can be misleading. That is, the source and destination operand symbols must specify the correct type (size) of the operands (bytes, words, or doublewords), but they do not have to specify the correct location. The locations of the source and destination operands are always specified by the DS:(E)SI and ES:(E)DI registers, which must be loaded correctly before the move string instruction is executed. 
+The no-operands form provides “short forms” of the byte, word, and doubleword versions of the MOVS instruc- tions. Here also DS:(E)SI and ES:(E)DI are assumed to be the source and destination operands, respectively. The size of the source and destination operands is selected with the mnemonic: MOVSB (byte move), MOVSW (word move), or MOVSD (doubleword move).
+翻译如下:
+在汇编代码级别，这种指令允许两种形式:“显式操作数”形式和“no-”形式操作数”的形式。显式操作数形式(由MOVS助记符指定)允许源和目标操作数要被显式指定。在这里，源操作数和目标操作数分别应该是表示源值和目标值的大小和位置。该显式操作数形式提供给允许文档;但是，请注意，此表单提供的文档可能具有误导性。也就是说,源操作数和目标操作数符号必须指定操作数(字节、字或双字)的正确类型(大小))，但它们不必指定正确的位置。源和目标的位置操作数总是由DS:(E)SI和ES:(E)DI寄存器指定的，这些寄存器必须被正确加载在执行移动字符串指令之前。
+no-操作数形式提供了MOVS指令c-的字节、字和双字版本的“简短形式”规划设计。这里还假设DS:(E)SI和ES:(E)DI分别是源操作数和目标操作数。使用助记符:MOVSB(字节移动)、MOVSW(字移动)或MOVSD(双字移动)选择源操作数和目标操作数的大小。
+
+INT 0x13中断(BIOS中断,不是x86):参考链接https://en.wikipedia.org/wiki/INT_13H
