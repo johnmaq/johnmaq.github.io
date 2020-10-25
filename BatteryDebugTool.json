@@ -5,9 +5,9 @@
   "html_url": "https://github.com/Skiars/SerialTool/releases/tag/v1.4.0alpha",
   "id": 21706405,
   "node_id": "MDc6UmVsZWFzZTIxNzA2NDA1",
-  "tag_name": "v1.4.0alpha",
+  "tag_name": "V106",
   "target_commitish": "master",
-  "name": "v1.4.0 alpha",
+  "name": "V106",
   "draft": false,
   "author": {
     "login": "Skiars",
@@ -37,7 +37,7 @@
       "url": "https://api.github.com/repos/Skiars/SerialTool/releases/assets/21708688",
       "id": 21708688,
       "node_id": "MDEyOlJlbGVhc2VBc3NldDIxNzA4Njg4",
-      "name": "SerialTool1.4.0a_Win32_Setup.exe",
+      "name": "BatteryDebugTool V106.exe",
       "label": null,
       "uploader": {
         "login": "Skiars",
