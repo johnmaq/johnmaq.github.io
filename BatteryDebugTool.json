@@ -10,13 +10,13 @@
   "name": "V106",
   "draft": false,
   "author": {
-    "login": "Skiars",
+    "login": "johnmaq",
     "id": 16442186,
     "node_id": "MDQ6VXNlcjE2NDQyMTg2",
     "avatar_url": "https://avatars2.githubusercontent.com/u/16442186?v=4",
     "gravatar_id": "",
     "url": "https://api.github.com/users/Skiars",
-    "html_url": "https://github.com/Skiars",
+    "html_url": "https://github.com/johnmaq",
     "followers_url": "https://api.github.com/users/Skiars/followers",
     "following_url": "https://api.github.com/users/Skiars/following{/other_user}",
     "gists_url": "https://api.github.com/users/Skiars/gists{/gist_id}",
@@ -34,7 +34,7 @@
   "published_at": "2019-11-23T13:56:38Z",
   "assets": [
     {
-      "url": "https://api.github.com/repos/Skiars/SerialTool/releases/assets/21708688",
+      "url": "https://api.github.com/repos/johnmaq/SerialTool/releases/assets/21708688",
       "id": 21708688,
       "node_id": "MDEyOlJlbGVhc2VBc3NldDIxNzA4Njg4",
       "name": "BatteryDebugTool V106.exe",
